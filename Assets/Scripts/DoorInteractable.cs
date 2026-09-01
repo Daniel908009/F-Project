@@ -54,6 +54,10 @@ public class DoorInteractable : Interactable
 
     public override string GetInteractionPrompt()
     {
-        return isOpen ? "E: Close" : "E: Open";
+        return isOpen ? "Close" : "Open";
+    }
+    public bool IsDoorOpen()
+    {
+        return isOpen;
     }
 }

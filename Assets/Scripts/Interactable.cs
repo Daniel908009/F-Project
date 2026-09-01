@@ -8,6 +8,6 @@ public class Interactable : MonoBehaviour
     }
     public virtual string GetInteractionPrompt()
     {
-        return "Press E";
+        return "Interact";
     }
 }

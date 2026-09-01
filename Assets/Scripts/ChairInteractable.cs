@@ -7,7 +7,7 @@ public class ChairInteractable : Interactable
 
     public override void Interact()
     {
-        PlayerModeController.Instance.EnterChair(seatPosition, exitPosition, GetComponentInChildren<Collider>());
+        PlayerModeController.Instance.EnterChair(seatPosition, exitPosition);
     }
 
     public override string GetInteractionPrompt()

@@ -63,7 +63,7 @@ public class HatchInteractable : Interactable
 
     public override string GetInteractionPrompt()
     {
-        return "E: " + (isOpen ? "Close" : "Open");
+        return isOpen ? "Close" : "Open";
     }
     public bool IsHatchOpen()
     {

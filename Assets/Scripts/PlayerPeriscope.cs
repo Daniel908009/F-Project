@@ -5,6 +5,7 @@ public class PlayerPeriscope : MonoBehaviour
 {
     [SerializeField] private PeriscopeController playerPeriscope;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Transform periscopeTransform;
 
     CharacterController characterController;
     private float verticalInput;
@@ -24,8 +25,8 @@ public class PlayerPeriscope : MonoBehaviour
         moved = playerPeriscope.MovePeriscope(verticalInput);
         if(playerInput.currentActionMap.name == "Periscope" && moved)
         {
-            Vector3 newPosition = transform.position + verticalInput * Vector3.up * playerPeriscope.moveSpeed * Time.deltaTime;
-            transform.position = newPosition;
+            Vector3 newPosition = verticalInput * Vector3.up * playerPeriscope.moveSpeed * Time.deltaTime;
+            transform.position = new Vector3(periscopeTransform.position.x, transform.position.y + newPosition.y, periscopeTransform.position.z);
         }
     }
     public void OnPeriscopeZoom(InputValue value)

@@ -38,4 +38,8 @@ public class SwitchInteractable : Interactable
             PowerManager.Instance.SetPower(powerCircuit, false);
         }
     }
+    public override string GetInteractionPrompt()
+    {
+        return powerCircuit.ToString() + (isOn ? " (ON)" : " (OFF)");
+    }
 }

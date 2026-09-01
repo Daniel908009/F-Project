@@ -494,6 +494,234 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""6761b57b-e67e-451e-964c-df9e237f9395"",
+            ""actions"": [
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""c5cbb711-e37d-428a-983c-e569c0ed4622"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""32655c7b-acf8-40fd-9d08-607b367e37e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangePrevious"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfbe7f6a-d8a2-467f-b94a-eb6b18de12ff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""b001d666-0a87-4a0b-8c43-6bc38c57e8d9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Controls"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6ef3919-7f6e-4e96-aa37-304e158ab730"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpeedUP"",
+                    ""type"": ""Button"",
+                    ""id"": ""79a85240-f270-4206-82f6-533d8717f56c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpeedDOWN"",
+                    ""type"": ""Button"",
+                    ""id"": ""98305073-bd35-4a83-9fab-ba5028d653cc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TurnLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e1cd49a-c200-4c78-8d62-a51f2a1b72f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TurnRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6b7052f-ee2f-4751-a5d1-ec8fd18c85f7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DepthDOWN"",
+                    ""type"": ""Button"",
+                    ""id"": ""631f7ff6-e9ad-4287-9bc2-62e528af754a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DepthUP"",
+                    ""type"": ""Button"",
+                    ""id"": ""b9eedf03-4783-4ee4-8d9d-7e9026ecdb2c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ac1de14a-7493-4937-8652-a1ea3203f766"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12b5ee43-b303-4589-af5f-236bbacf2a39"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12815803-6cc3-47c2-a7d1-32965aaa1dc1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangePrevious"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7755777f-fc88-408e-b3e1-e5f153a03842"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b103d66-a2cc-4ed4-a7c7-aed25cb72474"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Controls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a28f864-e264-4489-9880-fd30d1cbfae2"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedUP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f122c61-fd5b-47a0-b108-15236a672109"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedDOWN"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f25b2836-11c2-41f7-a0d1-bbc8dbd7032e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d901c11a-cfe3-4c8a-8660-fafb2d632972"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""391b3334-2883-408f-9229-aa94da9b78f2"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DepthDOWN"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04da70eb-0870-444a-a2a9-e81c6fddc7ee"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DepthUP"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -516,6 +744,19 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Chair_Exit = m_Chair.FindAction("Exit", throwIfNotFound: true);
         m_Chair_Zoom = m_Chair.FindAction("Zoom", throwIfNotFound: true);
         m_Chair_Interact = m_Chair.FindAction("Interact", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
+        m_Camera_ChangeNext = m_Camera.FindAction("ChangeNext", throwIfNotFound: true);
+        m_Camera_ChangePrevious = m_Camera.FindAction("ChangePrevious", throwIfNotFound: true);
+        m_Camera_Exit = m_Camera.FindAction("Exit", throwIfNotFound: true);
+        m_Camera_Controls = m_Camera.FindAction("Controls", throwIfNotFound: true);
+        m_Camera_SpeedUP = m_Camera.FindAction("SpeedUP", throwIfNotFound: true);
+        m_Camera_SpeedDOWN = m_Camera.FindAction("SpeedDOWN", throwIfNotFound: true);
+        m_Camera_TurnLeft = m_Camera.FindAction("TurnLeft", throwIfNotFound: true);
+        m_Camera_TurnRight = m_Camera.FindAction("TurnRight", throwIfNotFound: true);
+        m_Camera_DepthDOWN = m_Camera.FindAction("DepthDOWN", throwIfNotFound: true);
+        m_Camera_DepthUP = m_Camera.FindAction("DepthUP", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -523,6 +764,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerControls.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Periscope.enabled, "This will cause a leak and performance issues, PlayerControls.Periscope.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Chair.enabled, "This will cause a leak and performance issues, PlayerControls.Chair.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, PlayerControls.Camera.Disable() has not been called.");
     }
 
     /// <summary>
@@ -981,6 +1223,212 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="ChairActions" /> instance referencing this action map.
     /// </summary>
     public ChairActions @Chair => new ChairActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_Look;
+    private readonly InputAction m_Camera_ChangeNext;
+    private readonly InputAction m_Camera_ChangePrevious;
+    private readonly InputAction m_Camera_Exit;
+    private readonly InputAction m_Camera_Controls;
+    private readonly InputAction m_Camera_SpeedUP;
+    private readonly InputAction m_Camera_SpeedDOWN;
+    private readonly InputAction m_Camera_TurnLeft;
+    private readonly InputAction m_Camera_TurnRight;
+    private readonly InputAction m_Camera_DepthDOWN;
+    private readonly InputAction m_Camera_DepthUP;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Camera".
+    /// </summary>
+    public struct CameraActions
+    {
+        private @PlayerControls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/Look".
+        /// </summary>
+        public InputAction @Look => m_Wrapper.m_Camera_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/ChangeNext".
+        /// </summary>
+        public InputAction @ChangeNext => m_Wrapper.m_Camera_ChangeNext;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/ChangePrevious".
+        /// </summary>
+        public InputAction @ChangePrevious => m_Wrapper.m_Camera_ChangePrevious;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/Exit".
+        /// </summary>
+        public InputAction @Exit => m_Wrapper.m_Camera_Exit;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/Controls".
+        /// </summary>
+        public InputAction @Controls => m_Wrapper.m_Camera_Controls;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/SpeedUP".
+        /// </summary>
+        public InputAction @SpeedUP => m_Wrapper.m_Camera_SpeedUP;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/SpeedDOWN".
+        /// </summary>
+        public InputAction @SpeedDOWN => m_Wrapper.m_Camera_SpeedDOWN;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/TurnLeft".
+        /// </summary>
+        public InputAction @TurnLeft => m_Wrapper.m_Camera_TurnLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/TurnRight".
+        /// </summary>
+        public InputAction @TurnRight => m_Wrapper.m_Camera_TurnRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/DepthDOWN".
+        /// </summary>
+        public InputAction @DepthDOWN => m_Wrapper.m_Camera_DepthDOWN;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/DepthUP".
+        /// </summary>
+        public InputAction @DepthUP => m_Wrapper.m_Camera_DepthUP;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="CameraActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="CameraActions" />
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @ChangeNext.started += instance.OnChangeNext;
+            @ChangeNext.performed += instance.OnChangeNext;
+            @ChangeNext.canceled += instance.OnChangeNext;
+            @ChangePrevious.started += instance.OnChangePrevious;
+            @ChangePrevious.performed += instance.OnChangePrevious;
+            @ChangePrevious.canceled += instance.OnChangePrevious;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
+            @Controls.started += instance.OnControls;
+            @Controls.performed += instance.OnControls;
+            @Controls.canceled += instance.OnControls;
+            @SpeedUP.started += instance.OnSpeedUP;
+            @SpeedUP.performed += instance.OnSpeedUP;
+            @SpeedUP.canceled += instance.OnSpeedUP;
+            @SpeedDOWN.started += instance.OnSpeedDOWN;
+            @SpeedDOWN.performed += instance.OnSpeedDOWN;
+            @SpeedDOWN.canceled += instance.OnSpeedDOWN;
+            @TurnLeft.started += instance.OnTurnLeft;
+            @TurnLeft.performed += instance.OnTurnLeft;
+            @TurnLeft.canceled += instance.OnTurnLeft;
+            @TurnRight.started += instance.OnTurnRight;
+            @TurnRight.performed += instance.OnTurnRight;
+            @TurnRight.canceled += instance.OnTurnRight;
+            @DepthDOWN.started += instance.OnDepthDOWN;
+            @DepthDOWN.performed += instance.OnDepthDOWN;
+            @DepthDOWN.canceled += instance.OnDepthDOWN;
+            @DepthUP.started += instance.OnDepthUP;
+            @DepthUP.performed += instance.OnDepthUP;
+            @DepthUP.canceled += instance.OnDepthUP;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="CameraActions" />
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @ChangeNext.started -= instance.OnChangeNext;
+            @ChangeNext.performed -= instance.OnChangeNext;
+            @ChangeNext.canceled -= instance.OnChangeNext;
+            @ChangePrevious.started -= instance.OnChangePrevious;
+            @ChangePrevious.performed -= instance.OnChangePrevious;
+            @ChangePrevious.canceled -= instance.OnChangePrevious;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
+            @Controls.started -= instance.OnControls;
+            @Controls.performed -= instance.OnControls;
+            @Controls.canceled -= instance.OnControls;
+            @SpeedUP.started -= instance.OnSpeedUP;
+            @SpeedUP.performed -= instance.OnSpeedUP;
+            @SpeedUP.canceled -= instance.OnSpeedUP;
+            @SpeedDOWN.started -= instance.OnSpeedDOWN;
+            @SpeedDOWN.performed -= instance.OnSpeedDOWN;
+            @SpeedDOWN.canceled -= instance.OnSpeedDOWN;
+            @TurnLeft.started -= instance.OnTurnLeft;
+            @TurnLeft.performed -= instance.OnTurnLeft;
+            @TurnLeft.canceled -= instance.OnTurnLeft;
+            @TurnRight.started -= instance.OnTurnRight;
+            @TurnRight.performed -= instance.OnTurnRight;
+            @TurnRight.canceled -= instance.OnTurnRight;
+            @DepthDOWN.started -= instance.OnDepthDOWN;
+            @DepthDOWN.performed -= instance.OnDepthDOWN;
+            @DepthDOWN.canceled -= instance.OnDepthDOWN;
+            @DepthUP.started -= instance.OnDepthUP;
+            @DepthUP.performed -= instance.OnDepthUP;
+            @DepthUP.canceled -= instance.OnDepthUP;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CameraActions.UnregisterCallbacks(ICameraActions)" />.
+        /// </summary>
+        /// <seealso cref="CameraActions.UnregisterCallbacks(ICameraActions)" />
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="CameraActions.AddCallbacks(ICameraActions)" />
+        /// <seealso cref="CameraActions.RemoveCallbacks(ICameraActions)" />
+        /// <seealso cref="CameraActions.UnregisterCallbacks(ICameraActions)" />
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="CameraActions" /> instance referencing this action map.
+    /// </summary>
+    public CameraActions @Camera => new CameraActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -1088,5 +1536,90 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="CameraActions.AddCallbacks(ICameraActions)" />
+    /// <seealso cref="CameraActions.RemoveCallbacks(ICameraActions)" />
+    public interface ICameraActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ChangeNext" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnChangeNext(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ChangePrevious" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnChangePrevious(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Exit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnExit(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Controls" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnControls(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpeedUP" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpeedUP(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpeedDOWN" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpeedDOWN(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TurnLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTurnLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TurnRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTurnRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DepthDOWN" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDepthDOWN(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DepthUP" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDepthUP(InputAction.CallbackContext context);
     }
 }

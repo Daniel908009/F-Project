@@ -56,6 +56,6 @@ public class TeleportingInteractable : Interactable
 
     public override string GetInteractionPrompt()
     {
-        return "E";
+        return "Use";
     }
 }

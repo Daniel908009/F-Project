@@ -104,3 +104,9 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+#End of the default Unity .gitignore
+
+# Ignored files and folders from the Assets directory
+# Assets folder contents
+/Assets/_Recovery/

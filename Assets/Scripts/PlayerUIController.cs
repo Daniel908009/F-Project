@@ -4,7 +4,7 @@ public class PlayerUIController : MonoBehaviour
 {
     [SerializeField] private GameObject normalUI;
     [SerializeField] private GameObject periscopeUI;
-
+    [SerializeField] private GameObject cameraUI;
     public static PlayerUIController Instance { get; private set; }
     private void Awake()
     {
@@ -20,10 +20,18 @@ public class PlayerUIController : MonoBehaviour
     {
         normalUI.SetActive(true);
         periscopeUI.SetActive(false);
+        cameraUI.SetActive(false);
     }
     public void ShowPeriscopeUI()
     {
         normalUI.SetActive(false);
         periscopeUI.SetActive(true);
+        cameraUI.SetActive(false);
+    }
+    public void ShowCameraUI()
+    {
+        normalUI.SetActive(false);
+        periscopeUI.SetActive(false);
+        cameraUI.SetActive(true);
     }
 }

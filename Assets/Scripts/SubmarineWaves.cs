@@ -1,35 +1,18 @@
 using UnityEngine;
 
-public class SubmarineWaves : MonoBehaviour
+public class SubmarineWaves : FloatingObject
 {
-    [SerializeField] private Transform samplePointA;
-    [SerializeField] private Transform samplePointB;
-    [SerializeField] private Transform samplePointC;
-    [SerializeField] private Transform samplePointD;
     private Vector3 lastTransform;
-    [SerializeField] private Rigidbody submarineRigidbody;
-    [SerializeField] private float SubOffset = 3.5f;
-    [SerializeField] private float tiltStrength = 0.4f;
-    [SerializeField] private float fadeStartDistance = 0f;
-    [SerializeField] private float fadeEndDistance = -10f;
-
-    [SerializeField] private float desiredDepth = 0f;
-    [SerializeField] private float currentDepth = 0f;
-    [SerializeField] private float depthChangeSpeed = 1f;
-
-    [SerializeField] private float desiredSpeed = 0f;
-    [SerializeField] private float currentSpeed = 0f;
-    [SerializeField] private float maximumSpeed = 10f;
-    [SerializeField] private float maximumReverseSpeed = 5f;
-    [SerializeField] private float speedChangeSpeed = 1f;
-
-    [SerializeField] private float desiredTurning = 0f;
-    [SerializeField] private float currentTurning = 0f;
-    [SerializeField] private float maximumTurning = 1f;
-    [SerializeField] private float turningChangeSpeed = 1f;
     
     private Quaternion lastRotation;
 
+    [SerializeField] protected float fadeStartDistance = 0f;
+    [SerializeField] protected float fadeEndDistance = -10f;
+
+    [SerializeField] protected float desiredDepth = 0f;
+    [SerializeField] protected float maxDepth = 1000f;
+    [SerializeField] protected float depthChangeSpeed = 1f;
+    [SerializeField] protected float currentDepth = 0f;
     public static SubmarineWaves Instance { get; private set; }
     private void Awake()
     {
@@ -44,71 +27,78 @@ public class SubmarineWaves : MonoBehaviour
     }
     private void Start()
     {
-        lastTransform = transform.position;
-        lastRotation = transform.rotation;
+        lastTransform = rBody.position;
+        lastRotation = rBody.rotation;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        float averageWaveHeight = 0f;
-        Vector3 posA = samplePointA.position;
-        Vector3 posB = samplePointB.position;
-        Vector3 posC = samplePointC.position;
-        Vector3 posD = samplePointD.position;
-        posA.y = WaveScript.Instance.CalculateWave(posA).y;
-        posB.y = WaveScript.Instance.CalculateWave(posB).y;
-        posC.y = WaveScript.Instance.CalculateWave(posC).y;
-        posD.y = WaveScript.Instance.CalculateWave(posD).y;
-        averageWaveHeight += posA.y + posB.y + posC.y + posD.y;
-        averageWaveHeight /= 4f;
+        var (averageWaveHeight, posA, posB, posC, posD) = GetAverageHeight(samplePointA.position, samplePointB.position, samplePointC.position, samplePointD.position);
 
         
         //Debug.Log($"Wave Influence: {waveInfluence}, Fade Start: {fadeStartDistance}, Fade End: {fadeEndDistance}, Submarine Y: {transform.position.y}");
-
-        currentDepth = Mathf.MoveTowards(currentDepth, desiredDepth, Time.deltaTime * depthChangeSpeed);
-        currentSpeed = Mathf.MoveTowards(currentSpeed, desiredSpeed, Time.deltaTime * speedChangeSpeed);
-
+        if (PowerManager.Instance.IsPowered(PowerCircuit.EngineRoom))
+        {
+            currentDepth = Mathf.MoveTowards(currentDepth, desiredDepth, Time.fixedDeltaTime * depthChangeSpeed);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, desiredSpeed, Time.fixedDeltaTime * speedChangeSpeed);
+            currentTurning = Mathf.MoveTowards(currentTurning, desiredTurning, Time.fixedDeltaTime * turningChangeSpeed);
+        }
+        else
+        {
+            //currentDepth = Mathf.MoveTowards(currentDepth, 0f, Time.fixedDeltaTime * depthChangeSpeed);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, Time.fixedDeltaTime * speedChangeSpeed);
+            currentTurning = Mathf.MoveTowards(currentTurning, 0f, Time.fixedDeltaTime * turningChangeSpeed);
+        }
         float waveInfluence = Mathf.InverseLerp(fadeEndDistance, fadeStartDistance, -currentDepth);
         waveInfluence = Mathf.SmoothStep(0f, 1f, waveInfluence);
         //Debug.Log("waveInfluence: " + waveInfluence);
         
-        Vector3 newPosition = transform.position;
-        float targetY = Mathf.Lerp(
-                        transform.position.y,
-                        averageWaveHeight - SubOffset - currentDepth,
-                        waveInfluence);
-        newPosition.y = Mathf.Lerp(newPosition.y, targetY, Time.deltaTime * 2f);
-        newPosition += submarineRigidbody.rotation * Vector3.forward * currentSpeed * Time.deltaTime;
-        submarineRigidbody.MovePosition(newPosition);
 
-        Vector3 front = (posA + posB) * 0.5f;
-        Vector3 back = (posC + posD) * 0.5f;
-        Vector3 forward = (front - back).normalized;
+        Vector3 waterNormal = GetWaterNormal(posA, posB, posC, posD, waveInfluence);
 
-        Vector3 right = (posB + posC) * 0.5f;
-        Vector3 left = (posA + posD) * 0.5f;
-        Vector3 rightDir = (right - left).normalized;
-
-        Vector3 waterNormal = Vector3.Cross(forward, rightDir).normalized;
-
-        waterNormal = Vector3.Slerp(Vector3.up, waterNormal, tiltStrength * waveInfluence).normalized;
         //Debug.Log($"Water Normal: {waterNormal}, Forward: {forward}, RightDir: {rightDir}");
-        Quaternion targetRotation = Quaternion.FromToRotation(transform.up, waterNormal) * transform.rotation;
-        submarineRigidbody.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 2f));
-        Quaternion currentRotation = submarineRigidbody.rotation;
+        rBody.MoveRotation(RotateFunction(waterNormal));
+        Quaternion currentRotation = rBody.rotation;
         Quaternion rotationDelta = currentRotation * Quaternion.Inverse(lastRotation);
 
-        PlayerMovement.Instance.ApplySubRotation(rotationDelta, transform.position);
+        Vector3 newPosition = rBody.position;
+        /*float targetY = Mathf.Lerp(
+                        transform.position.y,
+                        averageWaveHeight - SubOffset - currentDepth,
+                        waveInfluence);*/
+        float targetY = Mathf.Lerp(
+            rBody.position.y,
+            averageWaveHeight * waveInfluence - FloatingOffset - currentDepth,
+            1f);
+
+        newPosition.y = Mathf.Lerp(
+            newPosition.y,
+            targetY,
+            Time.fixedDeltaTime * 2f);
+
+        newPosition += rBody.rotation * Vector3.forward 
+                    * currentSpeed 
+                    * Time.fixedDeltaTime;
+        //Debug.Log("new Position: " + newPosition);
+        //Debug.Log("Submarine Position: " + rBody.position);
+        rBody.MovePosition(newPosition); 
+
+        PlayerMovement.Instance.ApplySubRotation(rotationDelta, lastTransform);
 
         lastRotation = currentRotation;
-        Vector3 difference = transform.position - lastTransform;
+        Vector3 difference = rBody.position - lastTransform;
+        //Debug.Log($"Submarine Position: {rBody.position}, Last Position: {lastTransform}, Difference: {difference}");
         PlayerMovement.Instance.MoveWithSub(difference);
         //Debug.Log($"Sub Movement from sub script: {difference}");
-        lastTransform = transform.position;
+        lastTransform = rBody.position;
+    }
+    public void ChangePositionByOffset(Vector3 offset)
+    {
+        lastTransform -= offset;
     }
     public void ChangeDesiredDepth(float change)
     {
         desiredDepth += change;
-        desiredDepth = Mathf.Clamp(desiredDepth, 0f, float.PositiveInfinity);
+        desiredDepth = Mathf.Clamp(desiredDepth, 0f, maxDepth);
     }
     public float GetDesiredDepth()
     {
@@ -117,6 +107,10 @@ public class SubmarineWaves : MonoBehaviour
     public float GetCurrentDepth()
     {
         return currentDepth;
+    }
+    public float GetCurrentYRotation()
+    {
+        return rBody.rotation.eulerAngles.y;
     }
     public void ChangeDesiredSpeed(float change)
     {
@@ -127,6 +121,7 @@ public class SubmarineWaves : MonoBehaviour
     {
         desiredTurning += change;
         desiredTurning = Mathf.Clamp(desiredTurning, -maximumTurning, maximumTurning);
+        desiredTurning = Mathf.Round(desiredTurning * 10f) / 10f;
     }
     public float GetDesiredSpeed()
     {
@@ -139,5 +134,9 @@ public class SubmarineWaves : MonoBehaviour
     public float GetTurning()
     {
         return desiredTurning;
+    }
+    public GameObject GetSubmarine()
+    {
+        return this.gameObject;
     }
 }

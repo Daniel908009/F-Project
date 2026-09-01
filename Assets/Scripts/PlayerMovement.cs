@@ -52,14 +52,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //private void FixedUpdate()   //FIX. This has to be fixedUpdate...
-    //{
-    //    if (CanMove)
-    //    {
-    //        Move();
-    //    }
-    //}
-
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
@@ -131,22 +123,25 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveWithSub(Vector3 subMovement)
     {
+        bool wasEnabled = characterController.enabled;
         characterController.enabled = false;
         transform.position += subMovement;
-        characterController.enabled = true;
+        characterController.enabled = wasEnabled;
+        //Debug.Log($"Sub Movement from player script: {subMovement}");
     }
-public void ApplySubRotation(Quaternion rotationDelta, Vector3 subPosition)
-{
-    characterController.enabled = false;
+    public void ApplySubRotation(Quaternion rotationDelta, Vector3 subPosition)
+    {   
+        bool wasEnabled = characterController.enabled;
+        characterController.enabled = false;
 
-    Vector3 offset = transform.position - subPosition;
-    offset = rotationDelta * offset;
-    transform.position = subPosition + offset;
+        Vector3 offset = transform.position - subPosition;
+        offset = rotationDelta * offset;
+        transform.position = subPosition + offset;
 
-    transform.rotation = rotationDelta * transform.rotation;
+        transform.rotation = rotationDelta * transform.rotation;
 
-    characterController.enabled = true;
-}
+        characterController.enabled = wasEnabled;
+    }
 
     private void Look()
     {
@@ -163,7 +158,7 @@ public void ApplySubRotation(Quaternion rotationDelta, Vector3 subPosition)
             Quaternion.Euler(verticalRotation, 0f, 0f);
         lookInput = Vector2.zero;
     }
-    public void resetAngleLimits()
+    public void ResetAngleLimits()
     {
         MinVerticalAngle = -90f;
         MaxVerticalAngle = 90f;
