@@ -51,6 +51,7 @@ MonoBehaviour:
   samplePointB: {fileID: 4024168821007029649}
   samplePointC: {fileID: 6588780131946849661}
   samplePointD: {fileID: 7907393425228187819}
+  targetPoints: []
   desiredSpeed: 60
   currentSpeed: 0
   maximumSpeed: 0
@@ -59,7 +60,7 @@ MonoBehaviour:
   desiredTurning: 0
   currentTurning: 0
   maximumTurning: 1
-  turningChangeSpeed: 5
+  turningChangeSpeed: 10
   FloatingOffset: 5
   tiltStrength: 0.5
   InteractionWidthValue: 0

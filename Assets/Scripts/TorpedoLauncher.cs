@@ -40,6 +40,10 @@ public class TorpedoLauncher : MonoBehaviour
     }
     public void FloodSelectedTube(System.Action<float> updateSelectedTubeImagesCallback)
     {
+        if (!PowerManager.Instance.IsPowered(PowerCircuit.TorpedoSystem))
+        {
+            return;
+        }
         bool flood = !torpedoTubes[(int)selectedTubeIndex].IsFlooded;
         torpedoTubes[(int)selectedTubeIndex].IsFlooded = flood;
         //Debug.Log("Tube " + selectedTubeIndex + " flooded: " + flood);
@@ -47,7 +51,7 @@ public class TorpedoLauncher : MonoBehaviour
     }
     public void LoadTorpedoIntoSelectedTube(int torpedoTypeIndex, System.Action<float> updateSelectedTubeImagesCallback)
     {
-        if (torpedoTubes[(int)selectedTubeIndex].IsFlooded)
+        if (torpedoTubes[(int)selectedTubeIndex].IsFlooded || !PowerManager.Instance.IsPowered(PowerCircuit.TorpedoSystem))
         {
             //Debug.Log("Cannot load torpedo into tube " + selectedTubeIndex + " because it is flooded.");
             return;
@@ -61,13 +65,13 @@ public class TorpedoLauncher : MonoBehaviour
         //Debug.Log("Loaded torpedo into tube " + selectedTubeIndex);
         updateSelectedTubeImagesCallback(selectedTubeIndex);
     }
-    public void FireTorpedoFromSelectedTube(System.Action<float> updateSelectedTubeImagesCallback)
+    public void FireTorpedoFromSelectedTube(float time, float angle, System.Action<float> updateSelectedTubeImagesCallback)
     {
         TorpedoTube selectedTube = torpedoTubes[(int)selectedTubeIndex];
-        if (selectedTube.IsFlooded && selectedTube.TorpedoPrefab != null)
+        if (selectedTube.IsFlooded && selectedTube.TorpedoPrefab != null && PowerManager.Instance.IsPowered(PowerCircuit.TorpedoSystem))
         {
             GameObject torpedoInstance = Instantiate(selectedTube.TorpedoPrefab, selectedTube.transform.position, selectedTube.transform.rotation);
-            //torpedoInstance.Init()
+            torpedoInstance.GetComponent<TorpedoScript>().Init(time, angle);
             selectedTube.TorpedoPrefab = null;
             //Debug.Log("Fired torpedo from tube " + selectedTubeIndex);
         }

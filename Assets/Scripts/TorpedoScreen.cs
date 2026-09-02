@@ -145,6 +145,16 @@ public class TorpedoScreen : MonoBehaviour
     }
     public void FireTorpedoFromSelectedTube()
     {
-        TorpedoLauncher.Instance.FireTorpedoFromSelectedTube(UpdateSelectedTubeImages);
+        float time = 0f;
+        float angle = 0f;
+        if (!float.TryParse(TimeInputField.text, out time))
+        {
+            time = 0f;
+        }
+        if (!float.TryParse(AngleInputField.text, out angle))
+        {
+            angle = SubmarineWaves.Instance.GetCurrentYRotation();
+        }
+        TorpedoLauncher.Instance.FireTorpedoFromSelectedTube(time, angle, UpdateSelectedTubeImages);
     }
 }

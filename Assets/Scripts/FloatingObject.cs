@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class FloatingObject : MonoBehaviour
 {
-    
     [SerializeField] protected Rigidbody rBody;
     [SerializeField] protected Transform samplePointA; 
     [SerializeField] protected Transform samplePointB;
     [SerializeField] protected Transform samplePointC;
     [SerializeField] protected Transform samplePointD;
+
+    [SerializeField] protected Transform[] targetPoints;
 
     [SerializeField] protected float desiredSpeed = 0f;
     [SerializeField] protected float currentSpeed = 0f;
@@ -95,5 +96,9 @@ public class FloatingObject : MonoBehaviour
         Quaternion turnRotation = Quaternion.AngleAxis(turnThisFrame * Mathf.Rad2Deg, Vector3.up);
         targetRotation = turnRotation * targetRotation;
         return Quaternion.Slerp(rBody.rotation, targetRotation, Time.fixedDeltaTime * 2f);
+    }
+    public Transform[] GetTargetPoints()
+    {
+        return targetPoints;
     }
 }

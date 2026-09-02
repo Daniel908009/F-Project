@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum ConnectionType
 {
@@ -7,11 +8,12 @@ public enum ConnectionType
     UpConnection
 }
 [System.Serializable]
-struct RoomConnection
+public struct RoomConnection
 {
     [SerializeField] public RoomScript room;
     [SerializeField] public DoorInteractable door;
     [SerializeField] public HatchInteractable hatch;
+    [SerializeField] public bool hole;
     [SerializeField] public ConnectionType connectionType;
 }
 
@@ -23,18 +25,19 @@ public class RoomScript : MonoBehaviour
     private float floodingSpeed = 0f;
     [SerializeField] private Material blueMaterial;
     [SerializeField] private RoomConnection[] roomConnections = null;
+    public RoomConnection[] RoomConnections { get { return roomConnections; } }
     private float floodingValue = 0.1f;
     private BoxCollider roomCollider = null;
     public BoxCollider RoomCollider { get { return roomCollider; } } 
     private GameObject waterPlane = null;
     private void Awake()
     {
+        roomCollider = GetComponent<BoxCollider>();
+
         if (!hasWaterPlane)
         {
             return;
         }    
-        roomCollider = GetComponent<BoxCollider>();
-
         waterPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         Destroy(waterPlane.GetComponent<MeshCollider>());
         waterPlane.name = "WaterPlane";
@@ -77,6 +80,42 @@ public class RoomScript : MonoBehaviour
         //Debug.Break();
         waterPlane.transform.localPosition = new Vector3(0, y, 0);
     }
+    private bool HoleInConnectionLine(RoomScript otherRoom, List<RoomScript> checkedRooms = null)
+    {
+        //Debug.Log("Checked room:" +checkedRooms[0].name);
+        if (otherRoom.floodingSpeed > 0f)
+        {
+            //Debug.Log("this ran");
+            return true;
+        }
+        List<RoomScript> cRooms = checkedRooms ?? new List<RoomScript>();
+        if(!cRooms.Contains(this))
+        {
+            cRooms.Add(this);
+        }
+        //Debug.Log("Checking room: " + otherRoom.name);
+        //return false;
+        foreach (RoomConnection connection in otherRoom.RoomConnections)
+        {
+            if (connection.hatch != null && connection.hatch.IsHatchOpen() || connection.door != null && connection.door.IsDoorOpen() || connection.hole)
+            {
+                if (cRooms.Contains(connection.room))
+                {
+                    continue;
+                }
+                if (connection.room.HoleInConnectionLine(connection.room, cRooms))
+                {
+                    return true;
+                }
+            }
+        }
+        //Debug.Log("Checked rooms: " + cRooms.Count);
+        //foreach (RoomScript room in cRooms)
+        //{
+        //    Debug.Log("Checked room: " + room.name);
+        //}
+        return false;
+    }
     private float SpeedFromConnections()
     {
         float speed = 0f;
@@ -88,17 +127,19 @@ public class RoomScript : MonoBehaviour
             }
             float otherFloodLevel = connection.room.floodLevel;
             float otherFloodSpeed = connection.room.floodingSpeed;
+            //Debug.Log("From: " + name + " Connection to room: " + connection.room.name + " FloodLevel: " + otherFloodLevel + " FloodSpeed: " + otherFloodSpeed);
             if (connection.hatch != null && connection.hatch.IsHatchOpen())
             {
                 if (connection.connectionType == ConnectionType.UpConnection && otherFloodLevel > 0 && floodLevel < 1)
                 {
-                    speed += 0.8f *Time.deltaTime;
-                }else if (connection.connectionType == ConnectionType.DownConnection && otherFloodLevel < 1)
+                    speed += 1.2f *Time.deltaTime;
+                }else if (connection.connectionType == ConnectionType.DownConnection && otherFloodLevel < 0.99)
                 {
-                    speed -= 0.8f *Time.deltaTime;
-                }else if (connection.connectionType == ConnectionType.DownConnection && otherFloodLevel == 1 && otherFloodSpeed > 0)
+                    speed -= 1.2f *Time.deltaTime;
+                }else if (connection.connectionType == ConnectionType.DownConnection && otherFloodLevel > 0.99 && HoleInConnectionLine(connection.room, new List<RoomScript>() {this, connection.room}))
                 {
-                    speed += 0.8f *Time.deltaTime;
+                    //Debug.Log("this ran");
+                    speed += 1.2f *Time.deltaTime;
                 }
             }
             else if (connection.door != null && connection.door.IsDoorOpen())
@@ -107,6 +148,18 @@ public class RoomScript : MonoBehaviour
                 {
                     float floodDifference = otherFloodLevel - floodLevel;
                     speed += floodDifference * 0.5f;
+                }
+            }else if (connection.hole)
+            {
+                if (connection.connectionType == ConnectionType.DownConnection && otherFloodLevel < 0.99)
+                {
+                    speed -= 1.2f *Time.deltaTime;
+                }else if (connection.connectionType == ConnectionType.DownConnection && otherFloodLevel > 0.99 && HoleInConnectionLine(connection.room, new List<RoomScript>() {this, connection.room}))
+                {
+                    speed += 1.2f *Time.deltaTime;
+                }else if (connection.connectionType == ConnectionType.UpConnection && otherFloodLevel > 0 && floodLevel < 1)
+                {
+                    speed += 1.2f *Time.deltaTime;
                 }
             }
         }

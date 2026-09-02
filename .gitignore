@@ -110,3 +110,4 @@ InitTestScene*.unity*
 # Ignored files and folders from the Assets directory
 # Assets folder contents
 /Assets/_Recovery/
+/.vscode/

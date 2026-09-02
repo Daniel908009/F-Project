@@ -3,9 +3,10 @@ using UnityEngine;
 public class TorpedoScript : FloatingObject
 {
     [SerializeField] private GameObject explosionPrefab;
-    private float timeUntil = 0f;
+    private float timeUntil = -1f;
+    private float distanceTraveled = 0f;
     private float desiredAngle = 0f;
-    private GameObject target;
+    private GameObject target = null;
     public void Init(float time, float angle)
     {
         timeUntil = time;
@@ -15,34 +16,66 @@ public class TorpedoScript : FloatingObject
     {
         System.Collections.Generic.List<FloatingObject> floatingObjects = new System.Collections.Generic.List<FloatingObject>(EnemyManager.Instance.GetEnemyShipsFloatingObjects());
         floatingObjects.Add(SubmarineWaves.Instance.GetSubmarine().GetComponent<FloatingObject>());
+        System.Collections.Generic.List<GameObject> targetPoints = new System.Collections.Generic.List<GameObject>();
+        Transform[] targetPointsTemp;
+        foreach (FloatingObject ship in floatingObjects)
+        {
+            targetPointsTemp = ship.GetTargetPoints();
+            foreach (Transform point in targetPointsTemp)
+            {
+                if (point != null)
+                {
+                    targetPoints.Add(point.gameObject);
+                }
+            }
+            
+        } 
         Transform bestTarget = null;
         float smallestAngle = float.MaxValue;
 
-        foreach (FloatingObject ship in floatingObjects)
+        foreach (GameObject shipPoint in targetPoints)
         {
-            Vector3 directionToShip = (ship.transform.position - transform.position).normalized;
+            Vector3 directionToShip = (shipPoint.transform.position - transform.position).normalized;
             float angle = Vector3.Angle(transform.forward, directionToShip);
 
             if (angle < smallestAngle)
             {
                 smallestAngle = angle;
-                bestTarget = ship.transform;
+                bestTarget = shipPoint.transform;
             }
         }
         return bestTarget != null ? bestTarget.gameObject : null;
     }
     private void FixedUpdate()
     {
-        timeUntil -= Time.fixedDeltaTime;
-        if (timeUntil <= 0f)
+        if (distanceTraveled > 5000f)
+        {
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
+            Destroy(gameObject);
+            return;
+        }
+        if (timeUntil != -1f)
+        {
+            timeUntil -= Time.fixedDeltaTime;
+            if (timeUntil < 0f)
+            {
+                timeUntil = 0f;
+            }
+        }
+        if (target != null)
+        {
+            Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
+            desiredAngle = Mathf.Atan2(directionToTarget.x, directionToTarget.z) * Mathf.Rad2Deg;
+            float angleDiff = Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, desiredAngle));
+            if (angleDiff > 120f)
+            {
+                target = null;
+            }
+        }
+        if (timeUntil == 0f && target == null)
         {
             target = FindTarget();
-            if (target != null)
-            {
-                Vector3 directionToTarget = (target.transform.position - transform.position).normalized;
-                desiredAngle = Mathf.Atan2(directionToTarget.x, directionToTarget.z) * Mathf.Rad2Deg;
-                //Debug.Log("Torpedo target acquired: " + target.name + " at angle: " + desiredAngle);
-            }
+            //Debug.Log("Torpedo found target: " + (target != null ? target.name : "None"));
         }
         currentSpeed = desiredSpeed;
         
@@ -87,6 +120,7 @@ public class TorpedoScript : FloatingObject
                     * currentSpeed 
                     * Time.fixedDeltaTime;
         rBody.MovePosition(newPosition); 
+        distanceTraveled += currentSpeed * Time.fixedDeltaTime;
     }
     protected override void OnCollisionEnter(Collision collision)
     {
@@ -95,10 +129,11 @@ public class TorpedoScript : FloatingObject
 
         if (damageHandler != null)
         {
-            damageHandler.Hit(transform, 15f, 1f);
+            damageHandler.Hit(transform.position, 15f, 1f);
         }
 
-        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        explosion.SetActive(true);
         Destroy(gameObject);
     }
 }

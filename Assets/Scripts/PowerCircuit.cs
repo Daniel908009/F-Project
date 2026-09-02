@@ -2,7 +2,7 @@ public enum PowerCircuit
 {
     MainPower,
     CommandRoom,
-    TorpedoRoom,
+    TorpedoSystem,
     EngineRoom,
     RocketRoom,
     DroneRoom,
