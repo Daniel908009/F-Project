@@ -27,6 +27,6 @@ public class EnemyShip : FloatingObject
         newPosition += rBody.rotation * Vector3.forward 
                     * currentSpeed 
                     * Time.fixedDeltaTime;
-        rBody.MovePosition(newPosition); 
+        rBody.MovePosition(newPosition);
     }
 }

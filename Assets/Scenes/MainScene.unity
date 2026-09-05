@@ -1105,9 +1105,10 @@ MonoBehaviour:
   stoneSlopeThreshold: 40
   equatorSnowTreshold: 50000
   material: {fileID: 2100000, guid: d38073c50f10f5565a8ec0e3b9bcf246, type: 2}
+  physicMaterial: {fileID: 13400000, guid: a53ef8cef5b989e65b214a2e5722a4c9, type: 2}
   resolution: 257
   chunkHeight: 5000
-  chunkHeightOffset: -2576
+  chunkHeightOffset: -2426
 --- !u!4 &40834913
 Transform:
   m_ObjectHideFlags: 0
@@ -1186,6 +1187,7 @@ MonoBehaviour:
   MaxWakeValue: 10
   hullValue: {fileID: 364849663}
   WakePositionValue: {fileID: 1516263406}
+  numberOfRoomsToSinking: 4
 --- !u!54 &43679552
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1241,6 +1243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e06b13eaab1efcdacb888cb4899546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageHandler
+  explosionPrefab: {fileID: 6870581185121593534, guid: ccd4c1c9227affad7a2d0bf403ead8c4, type: 3}
+  timeToHullDestruction: 15
 --- !u!1 &47664024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,8 +1707,8 @@ MonoBehaviour:
   playerCamera: {fileID: 868713196}
   underwaterVolume: {fileID: 7383411}
   surfaceFogColor: {r: 1, g: 1, b: 1, a: 1}
-  surfaceFogStart: 2000
-  surfaceFogEnd: 3000
+  surfaceFogStart: 20000
+  surfaceFogEnd: 30000
   surfaceSkyColor: {r: 0.5, g: 0.7, b: 1, a: 1}
   underwaterFogColor: {r: 0.1, g: 0.3, b: 0.5, a: 1}
   underwaterFogStart: 0
@@ -37517,6 +37521,7 @@ MonoBehaviour:
   MaxWakeValue: 10
   hullValue: {fileID: 543450652221595252}
   WakePositionValue: {fileID: 1657014018}
+  numberOfRoomsToSinking: 5
 --- !u!114 &1850922513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37529,6 +37534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e06b13eaab1efcdacb888cb4899546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageHandler
+  explosionPrefab: {fileID: 6870581185121593534, guid: ccd4c1c9227affad7a2d0bf403ead8c4, type: 3}
+  timeToHullDestruction: 15
 --- !u!1 &1855416767
 GameObject:
   m_ObjectHideFlags: 0
@@ -42429,7 +42436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FloatingOrigin
   player: {fileID: 1012105633}
   threshold: 1000
-  initialOffset: {x: 52762, y: 0, z: 35145}
+  initialOffset: {x: 52762, y: 0, z: 29000}
 --- !u!4 &2113629960
 Transform:
   m_ObjectHideFlags: 0
@@ -48101,6 +48108,7 @@ MonoBehaviour:
   MaxWakeValue: 5
   hullValue: {fileID: 6040891622722383464}
   WakePositionValue: {fileID: 1752801554}
+  numberOfRoomsToSinking: 3
   fadeStartDistance: 0
   fadeEndDistance: -20
   desiredDepth: 0
@@ -48146,6 +48154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e06b13eaab1efcdacb888cb4899546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageHandler
+  explosionPrefab: {fileID: 6870581185121593534, guid: ccd4c1c9227affad7a2d0bf403ead8c4, type: 3}
+  timeToHullDestruction: 15
 --- !u!4 &4441173834130634385
 Transform:
   m_ObjectHideFlags: 0

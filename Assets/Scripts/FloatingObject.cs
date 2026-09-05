@@ -42,6 +42,15 @@ public class FloatingObject : MonoBehaviour
     public Transform Hull => hullValue;
     [SerializeField] protected Transform WakePositionValue;
     public Transform WakePosition => WakePositionValue;
+    [SerializeField] protected float numberOfRoomsToSinking = 3f;
+
+    protected float hullHealth = 100f;
+    public float HullHealth
+    {
+        get { return hullHealth; }
+        set { hullHealth = value; }
+    }
+
     protected (float, Vector3, Vector3, Vector3, Vector3) GetAverageHeight(Vector3 pointA, Vector3 pointB, Vector3 pointC, Vector3 pointD)
     {
         float averageWaveHeight = 0f;
@@ -77,11 +86,12 @@ public class FloatingObject : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Terrain>() != null)
         {
-            Debug.Log("Hit terrain!");
+            //Debug.Log("Hit terrain!");
             desiredSpeed = 0f;
             desiredTurning = 0f;
             currentSpeed = 0f;
             currentTurning = 0f;
+            this.GetComponent<DamageHandler>()?.Hit(collision.contacts[0].point, 20f, 1f);
         }
     }
 
@@ -100,5 +110,35 @@ public class FloatingObject : MonoBehaviour
     public Transform[] GetTargetPoints()
     {
         return targetPoints;
+    }
+    public float GetSinkingVariable()
+    {
+        DamageHandler damageHandler = GetComponent<DamageHandler>();
+        if (damageHandler == null)
+        {
+            return 0f;
+        }
+        RoomScript[] rooms = damageHandler.Rooms;
+        if (rooms == null || rooms.Length == 0){
+            return 0f;
+        }
+        float currentFlooding = 0f;
+        foreach (RoomScript room in rooms)
+        {
+            currentFlooding += room.FloodLevel;
+        }
+        float totalFlood = rooms.Length;
+
+        float sinkingVariable = 1f - (currentFlooding / numberOfRoomsToSinking);
+
+        if (sinkingVariable < 0f)
+        {
+            sinkingVariable =
+                -(currentFlooding - numberOfRoomsToSinking) /
+                (totalFlood - numberOfRoomsToSinking);
+        }
+
+        //Debug.Log("Sinking variable: " + sinkingVariable);
+        return Mathf.Clamp(1f - sinkingVariable, 0f, 2f);
     }
 }

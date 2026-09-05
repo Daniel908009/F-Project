@@ -19,6 +19,10 @@ public class PeriscopeController : MonoBehaviour
     }
     public bool MovePeriscope(float verticalInput)
     {
+        if (MovingPart == null)
+        {
+            return false;
+        }
         Vector3 newPosition = MovingPart.localPosition;
         newPosition.y += verticalInput * moveSpeed * Time.deltaTime;
         //newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);

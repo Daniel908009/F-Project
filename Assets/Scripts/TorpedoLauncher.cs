@@ -32,6 +32,10 @@ public class TorpedoLauncher : MonoBehaviour
     }
     public void ChangeSelectedTubeIndex(float newIndex)
     {
+        if (!PowerManager.Instance.IsPowered(PowerCircuit.TorpedoSystem))
+        {
+            return;
+        }
         if (newIndex >= 0 && newIndex < torpedoTubes.Length)
         {
             selectedTubeIndex = newIndex;

@@ -23,6 +23,7 @@ public class ChunkManager : MonoBehaviour
     [SerializeField] private float stoneSlopeThreshold;
     [SerializeField] private float equatorSnowTreshold;
     [SerializeField] private Material material;
+    [SerializeField] private PhysicsMaterial physicMaterial;
     [SerializeField] private int resolution = 257;
     [SerializeField] private float chunkHeight = 5000f;
     [SerializeField] private float chunkHeightOffset = -76f;
@@ -182,6 +183,7 @@ public class ChunkManager : MonoBehaviour
 
                     TerrainCollider collider = chunkObject.GetComponent<TerrainCollider>();
                     collider.terrainData = data;
+                    collider.material = physicMaterial;
                     loadedChunks[chunk] = chunkObject;
                 }
             }

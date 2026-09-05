@@ -68,19 +68,22 @@ public class OceanTexture : MonoBehaviour
 
     private void Update()
     {
-        Vector3 submarinePosition = submarine.Hull.position;
-        Vector3 wakePos = submarine.WakePosition.position;
+        if (submarine != null)
+        {
+            Vector3 submarinePosition = submarine.Hull.position;
+            Vector3 wakePos = submarine.WakePosition.position;
 
-        //ClearInteractionTexture();
-        float strength = 1f - (SubmarineWaves.Instance.GetCurrentDepth() / 5f) * 0.75f;
-        strength = Mathf.Clamp01(strength);
-        //Debug.Log("Angles: " + submarine.Hull.rotation.eulerAngles.y);
-        float strengthWake = submarine.CurrentSpeed / submarine.MaximumSpeed;
-        //Debug.Log("strengthWake: " + strengthWake);
-        float magnitude = submarine.MaxWake / WaveScript.Instance.MaxWakeHeight;
-        DrawInteraction(submarine, wakePos, submarine.transform.rotation.eulerAngles.y, strength, strengthWake, magnitude);
-        AccumulateTextures();
-        useFirstTexture = !useFirstTexture;
+            //ClearInteractionTexture();
+            float strength = 1f - (SubmarineWaves.Instance.GetCurrentDepth() / 5f) * 0.75f;
+            strength = Mathf.Clamp01(strength);
+            //Debug.Log("Angles: " + submarine.Hull.rotation.eulerAngles.y);
+            float strengthWake = submarine.CurrentSpeed / submarine.MaximumSpeed;
+            //Debug.Log("strengthWake: " + strengthWake);
+            float magnitude = submarine.MaxWake / WaveScript.Instance.MaxWakeHeight;
+            DrawInteraction(submarine, wakePos, submarine.transform.rotation.eulerAngles.y, strength, strengthWake, magnitude);
+            AccumulateTextures();
+            useFirstTexture = !useFirstTexture;
+        }
         EnemyShip[] enemyShips = EnemyManager.Instance.GetEnemyShips();
         foreach (EnemyShip enemyShip in enemyShips)
         {

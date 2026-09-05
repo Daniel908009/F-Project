@@ -20,6 +20,7 @@ public struct RoomConnection
 public class RoomScript : MonoBehaviour
 {
     [SerializeField] private float floodLevel = 0f;
+    public float FloodLevel { get { return floodLevel; } }
     [SerializeField] private bool hasWaterPlane = false;
     [SerializeField] private float damageLevel = 0f;
     private float floodingSpeed = 0f;

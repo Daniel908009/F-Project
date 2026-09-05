@@ -31,7 +31,10 @@ public class OceanScript : MonoBehaviour
             playerTileX = newPlayerTileX;
             playerTileZ = newPlayerTileZ; 
         }*/
-        transform.position = new Vector3(FollowObject.transform.position.x, 0f, FollowObject.transform.position.z);
+        if (FollowObject != null)
+        {
+            transform.position = new Vector3(FollowObject.transform.position.x, 0f, FollowObject.transform.position.z);
+        }
         //Debug.DrawLine(new Vector3(player.position.x, 0f, player.position.z), new Vector3(player.position.x, WaveScript.Instance.CalculateWave(player.position).y, player.position.z), Color.red);
     }
 }

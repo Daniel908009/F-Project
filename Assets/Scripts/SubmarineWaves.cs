@@ -34,8 +34,6 @@ public class SubmarineWaves : FloatingObject
     {
         var (averageWaveHeight, posA, posB, posC, posD) = GetAverageHeight(samplePointA.position, samplePointB.position, samplePointC.position, samplePointD.position);
 
-        
-        //Debug.Log($"Wave Influence: {waveInfluence}, Fade Start: {fadeStartDistance}, Fade End: {fadeEndDistance}, Submarine Y: {transform.position.y}");
         if (PowerManager.Instance.IsPowered(PowerCircuit.EngineRoom))
         {
             currentDepth = Mathf.MoveTowards(currentDepth, desiredDepth, Time.fixedDeltaTime * depthChangeSpeed);
@@ -44,27 +42,32 @@ public class SubmarineWaves : FloatingObject
         }
         else
         {
-            //currentDepth = Mathf.MoveTowards(currentDepth, 0f, Time.fixedDeltaTime * depthChangeSpeed);
             currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, Time.fixedDeltaTime * speedChangeSpeed);
             currentTurning = Mathf.MoveTowards(currentTurning, 0f, Time.fixedDeltaTime * turningChangeSpeed);
         }
+        //Debug.Log("sinking variable: " + GetSinkingVariable());
+        float sinkingVariable = GetSinkingVariable();
+        if (!PowerManager.Instance.IsPowered(PowerCircuit.EngineRoom))
+        {
+            sinkingVariable -= 1f;
+            if (sinkingVariable < 0f)
+            {
+                sinkingVariable = 0f;
+            }
+        }
+        currentDepth += Time.fixedDeltaTime * sinkingVariable;
+
         float waveInfluence = Mathf.InverseLerp(fadeEndDistance, fadeStartDistance, -currentDepth);
         waveInfluence = Mathf.SmoothStep(0f, 1f, waveInfluence);
-        //Debug.Log("waveInfluence: " + waveInfluence);
         
-
         Vector3 waterNormal = GetWaterNormal(posA, posB, posC, posD, waveInfluence);
 
-        //Debug.Log($"Water Normal: {waterNormal}, Forward: {forward}, RightDir: {rightDir}");
         rBody.MoveRotation(RotateFunction(waterNormal));
         Quaternion currentRotation = rBody.rotation;
         Quaternion rotationDelta = currentRotation * Quaternion.Inverse(lastRotation);
 
         Vector3 newPosition = rBody.position;
-        /*float targetY = Mathf.Lerp(
-                        transform.position.y,
-                        averageWaveHeight - SubOffset - currentDepth,
-                        waveInfluence);*/
+
         float targetY = Mathf.Lerp(
             rBody.position.y,
             averageWaveHeight * waveInfluence - FloatingOffset - currentDepth,
