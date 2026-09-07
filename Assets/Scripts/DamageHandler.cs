@@ -47,10 +47,28 @@ public class DamageHandler : MonoBehaviour
         {
             floatingObject.HullHealth -= damageThisUpdate;
             //Debug.Log("Hull health: " + floatingObject.HullHealth);
+            if (floatingObject.CurrentDepth > floatingObject.MaxSafeDepth)
+            {
+                float depthExcess = floatingObject.CurrentDepth - floatingObject.MaxSafeDepth;
+                float damageFromDepth = depthExcess * 0.01f * Time.deltaTime;
+                foreach (RoomScript room in rooms)
+                {
+                    room.SetDamageLevel(damageFromDepth);
+                }
+            }
             if (floatingObject.HullHealth <= 0f)
             {
                 GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
                 explosion.SetActive(true);
+                if (floatingObject is SubmarineWaves)
+                {
+                    SubmarineWaves.Instance.enabled = false;
+                }
+                else if (floatingObject is EnemyShip)
+                {
+                    EnemyShip enemyShip = floatingObject as EnemyShip;
+                    EnemyManager.Instance.RemoveEnemyShip(enemyShip);
+                }
                 Destroy(gameObject);
             }
         }

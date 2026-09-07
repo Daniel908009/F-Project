@@ -9,10 +9,6 @@ public class SubmarineWaves : FloatingObject
     [SerializeField] protected float fadeStartDistance = 0f;
     [SerializeField] protected float fadeEndDistance = -10f;
 
-    [SerializeField] protected float desiredDepth = 0f;
-    [SerializeField] protected float maxDepth = 1000f;
-    [SerializeField] protected float depthChangeSpeed = 1f;
-    [SerializeField] protected float currentDepth = 0f;
     public static SubmarineWaves Instance { get; private set; }
     private void Awake()
     {
@@ -71,7 +67,8 @@ public class SubmarineWaves : FloatingObject
         float targetY = Mathf.Lerp(
             rBody.position.y,
             averageWaveHeight * waveInfluence - FloatingOffset - currentDepth,
-            1f);
+            speedOfTargetYChange * Time.fixedDeltaTime);
+        //Debug.Log("submarine current depth: " + currentDepth + " sinking variable: " + sinkingVariable);
 
         newPosition.y = Mathf.Lerp(
             newPosition.y,
@@ -101,7 +98,10 @@ public class SubmarineWaves : FloatingObject
     public void ChangeDesiredDepth(float change)
     {
         desiredDepth += change;
-        desiredDepth = Mathf.Clamp(desiredDepth, 0f, maxDepth);
+        if (desiredDepth < 0f)
+        {
+            desiredDepth = 0f;
+        }
     }
     public float GetDesiredDepth()
     {

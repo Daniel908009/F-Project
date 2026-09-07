@@ -30,4 +30,20 @@ public class EnemyManager : MonoBehaviour
         }
         return floatingObjects;
     }
+    public void RemoveEnemyShip(EnemyShip ship)
+    {
+        int index = System.Array.IndexOf(enemyShips, ship);
+        if (index >= 0)
+        {
+            EnemyShip[] newArray = new EnemyShip[enemyShips.Length - 1];
+            for (int i = 0, j = 0; i < enemyShips.Length; i++)
+            {
+                if (i != index)
+                {
+                    newArray[j++] = enemyShips[i];
+                }
+            }
+            enemyShips = newArray;
+        }
+    }
 }

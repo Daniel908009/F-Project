@@ -1173,6 +1173,11 @@ MonoBehaviour:
   maximumSpeed: 40
   maximumReverseSpeed: 10
   speedChangeSpeed: 1
+  currentDepth: 0
+  desiredDepth: 0
+  depthChangeSpeed: 1
+  speedOfTargetYChange: 15
+  maxSafeDepth: 1000
   desiredTurning: 0
   currentTurning: 0
   maximumTurning: 1
@@ -37507,6 +37512,11 @@ MonoBehaviour:
   maximumSpeed: 40
   maximumReverseSpeed: 20
   speedChangeSpeed: 1
+  currentDepth: 0
+  desiredDepth: 0
+  depthChangeSpeed: 1
+  speedOfTargetYChange: 15
+  maxSafeDepth: 1000
   desiredTurning: 0
   currentTurning: 0
   maximumTurning: 1
@@ -48094,6 +48104,11 @@ MonoBehaviour:
   maximumSpeed: 20
   maximumReverseSpeed: 10
   speedChangeSpeed: 1
+  currentDepth: 0
+  desiredDepth: 0
+  depthChangeSpeed: 1
+  speedOfTargetYChange: 10
+  maxSafeDepth: 500
   desiredTurning: 0
   currentTurning: 0
   maximumTurning: 1
@@ -48111,10 +48126,6 @@ MonoBehaviour:
   numberOfRoomsToSinking: 3
   fadeStartDistance: 0
   fadeEndDistance: -20
-  desiredDepth: 0
-  maxDepth: 1000
-  depthChangeSpeed: 1
-  currentDepth: 0
 --- !u!54 &4424705196656782252
 Rigidbody:
   m_ObjectHideFlags: 0

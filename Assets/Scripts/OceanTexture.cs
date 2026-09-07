@@ -87,6 +87,10 @@ public class OceanTexture : MonoBehaviour
         EnemyShip[] enemyShips = EnemyManager.Instance.GetEnemyShips();
         foreach (EnemyShip enemyShip in enemyShips)
         {
+            if (enemyShip == null)
+            {
+                continue;
+            }
             Vector3 enemyWakePos = enemyShip.WakePosition.position;
             float enemyStrength = 1f;
             enemyStrength = Mathf.Clamp01(enemyStrength);

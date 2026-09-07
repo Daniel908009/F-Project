@@ -17,6 +17,13 @@ public class FloatingObject : MonoBehaviour
     public float MaximumSpeed => maximumSpeed;
     [SerializeField] protected float maximumReverseSpeed = 5f;
     [SerializeField] protected float speedChangeSpeed = 1f;
+    [SerializeField] protected float currentDepth = 0f;
+    public float CurrentDepth => currentDepth;
+    [SerializeField] protected float desiredDepth = 0f;
+    [SerializeField] protected float depthChangeSpeed = 1f;
+    [SerializeField] protected float speedOfTargetYChange = 10f;
+    [SerializeField] protected float maxSafeDepth = 1000f;
+    public float MaxSafeDepth => maxSafeDepth;
 
     [SerializeField] protected float desiredTurning = 0f;
     [SerializeField] protected float currentTurning = 0f;
@@ -91,6 +98,11 @@ public class FloatingObject : MonoBehaviour
             desiredTurning = 0f;
             currentSpeed = 0f;
             currentTurning = 0f;
+            desiredDepth = currentDepth-5;
+            if (desiredDepth < 0f)
+            {
+                desiredDepth = 0f;
+            }
             this.GetComponent<DamageHandler>()?.Hit(collision.contacts[0].point, 20f, 1f);
         }
     }
@@ -138,7 +150,7 @@ public class FloatingObject : MonoBehaviour
                 (totalFlood - numberOfRoomsToSinking);
         }
 
-        //Debug.Log("Sinking variable: " + sinkingVariable);
+        //Debug.Log("Sinking variable: " + sinkingVariable + " currentFlooding: " + currentFlooding + " numberOfRoomsToSinking: " + numberOfRoomsToSinking + " totalFlood: " + totalFlood);
         return Mathf.Clamp(1f - sinkingVariable, 0f, 2f);
     }
 }

@@ -14,10 +14,16 @@ public class EnemyShip : FloatingObject
         rBody.MoveRotation(RotateFunction(waterNormal));
 
         Vector3 newPosition = rBody.position;
+
+        float sinkingVariable = GetSinkingVariable();
+        //Debug.Log("current depth: " + currentDepth + " sinking variable: " + sinkingVariable);
+        currentDepth = Mathf.MoveTowards(currentDepth, desiredDepth, Time.fixedDeltaTime * depthChangeSpeed);
+        currentDepth += Time.fixedDeltaTime * sinkingVariable;
         float targetY = Mathf.Lerp(
             rBody.position.y,
-            averageWaveHeight - FloatingOffset,
-            0.2f);
+            averageWaveHeight - FloatingOffset - currentDepth,
+            speedOfTargetYChange * Time.fixedDeltaTime);
+
 
         newPosition.y = Mathf.Lerp(
             newPosition.y,
