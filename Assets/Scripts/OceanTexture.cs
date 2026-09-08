@@ -92,7 +92,7 @@ public class OceanTexture : MonoBehaviour
                 continue;
             }
             Vector3 enemyWakePos = enemyShip.WakePosition.position;
-            float enemyStrength = 1f;
+            float enemyStrength = 1f - (enemyShip.CurrentDepth / 5f) * 0.75f;
             enemyStrength = Mathf.Clamp01(enemyStrength);
             float enemyStrengthWake = enemyShip.CurrentSpeed / enemyShip.MaximumSpeed;
             float enemyMagnitude = enemyShip.MaxWake / WaveScript.Instance.MaxWakeHeight;

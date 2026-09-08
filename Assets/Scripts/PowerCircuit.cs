@@ -9,6 +9,4 @@ public enum PowerCircuit
     StorageRoom,
     CrewRoom,
     EquipmentRoom,
-    PowerRoom,
-
 }

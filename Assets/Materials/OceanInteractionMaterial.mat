@@ -39,13 +39,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _InteractionLength: 0.2
-    - _InteractionRotation: -0.000036726025
+    - _InteractionRotation: -0.0001988429
     - _InteractionStrength: 1
     - _InteractionWakeAngle: 0.5
     - _InteractionWakeLength: 0.4
     - _InteractionWakeLengthNormal: 270
     - _InteractionWakeMagnitude: 1
-    - _InteractionWakeRotation: 3.141556
+    - _InteractionWakeRotation: 3.141394
     - _InteractionWakeWidth: 0.2
     - _InteractionWidth: 0.04
     - _QueueControl: 0
@@ -53,9 +53,9 @@ Material:
     - _WakeEdgeSharpness: 5
     - _WakeStrength: 0
     m_Colors:
-    - _InteractionPosition: {r: 0.36637628, g: 0.8124866, b: 0, a: 0}
-    - _InteractionWakePosNormal: {r: -280.59674, g: 4.564004, b: 1011.49316, a: 0}
-    - _InteractionWakePosition: {r: 0.3663825, g: 0.98162943, b: 0, a: 0}
+    - _InteractionPosition: {r: 0.36637476, g: 0.8125288, b: 0, a: 0}
+    - _InteractionWakePosNormal: {r: -280.5424, g: 3.8656514, b: 1011.4907, a: 0}
+    - _InteractionWakePosition: {r: 0.3664084, g: 0.9816717, b: 0, a: 0}
     - _UVOffset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

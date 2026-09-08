@@ -42,4 +42,24 @@ public class SwitchInteractable : Interactable
     {
         return powerCircuit.ToString() + (isOn ? " (ON)" : " (OFF)");
     }
+    public PowerCircuit GetPowerCircuit()
+    {
+        return powerCircuit;
+    }
+    public void SetSwitchState(bool state)
+    {
+        isOn = state;
+        if (isOn)
+        {
+            switchTransform.rotation = Quaternion.Euler(onRotation);
+            switchRenderer.material = onMaterial;
+            PowerManager.Instance.SetPower(powerCircuit, true);
+        }
+        else
+        {
+            switchTransform.rotation = Quaternion.Euler(offRotation);
+            switchRenderer.material = offMaterial;
+            PowerManager.Instance.SetPower(powerCircuit, false);
+        }
+    }
 }
